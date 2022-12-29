@@ -12,7 +12,7 @@ const MyTask = () => {
     const { data: AllTasks, isLoading, refetch } = useQuery({
         queryKey: ['allTasks'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:8000/allTasks');
+            const res = await fetch('https://management-app-server.vercel.app/allTasks');
             const data = await res.json();
             return data.data;
         }
@@ -33,7 +33,7 @@ const MyTask = () => {
             confirmButtonText: 'Yes'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:8000/task/${task._id}`, {
+                fetch(`https://management-app-server.vercel.app/task/${task._id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())
@@ -61,7 +61,7 @@ const MyTask = () => {
             return toast.error('Already Completed')
         }
 
-        fetch(`http://localhost:8000/taskStatus/${task._id}`, {
+        fetch(`https://management-app-server.vercel.app/taskStatus/${task._id}`, {
             method: 'PUT'
         })
             .then(res => res.json())

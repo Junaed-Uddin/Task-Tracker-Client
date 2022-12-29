@@ -11,7 +11,7 @@ const EditTask = () => {
 
     const handleEdit = event => {
         event.preventDefault();
-        fetch(`http://localhost:8000/editTask/${_id}`, {
+        fetch(`https://management-app-server.vercel.app/editTask/${_id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'

@@ -24,12 +24,12 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/viewMedia/:id',
-                loader: ({ params }) => fetch(`http://localhost:8000/allTasks/${params.id}`),
+                loader: ({ params }) => fetch(`https://management-app-server.vercel.app/allTasks/${params.id}`),
                 element: <PrivateRoute><ViewMedia></ViewMedia></PrivateRoute>,
             },
             {
                 path: '/EditTask/:id',
-                loader: ({ params }) => fetch(`http://localhost:8000/allTasks/${params.id}`),
+                loader: ({ params }) => fetch(`https://management-app-server.vercel.app/allTasks/${params.id}`),
                 element: <EditTask></EditTask>,
             },
             {

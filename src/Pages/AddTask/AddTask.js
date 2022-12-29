@@ -25,7 +25,7 @@ const AddTask = () => {
                     console.log(imageData);
                     const taskDetails = { taskName, desc, image: imageData.data.url, status: 'incomplete' };
 
-                    fetch('http://localhost:8000/tasks', {
+                    fetch('https://management-app-server.vercel.app/tasks', {
                         method: 'POST',
                         headers: {
                             "Content-Type": "application/json",
