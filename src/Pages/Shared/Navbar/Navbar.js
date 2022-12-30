@@ -2,17 +2,19 @@ import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css';
 import logo from '../../../assets/logo.jpg';
-import { MdAddTask, MdOutlineTask } from 'react-icons/md';
+import { MdAddTask, MdDarkMode, MdOutlineLightMode, MdOutlineTask } from 'react-icons/md';
 import { BsListTask } from 'react-icons/bs';
 import { FaUserCircle } from 'react-icons/fa';
 import { AuthProvider } from '../../../contexts/AuthContext';
 import { toast } from 'react-hot-toast';
 import { Tooltip } from '@material-tailwind/react';
 import userImg from '../../../assets/userImg.jpg';
+import { DarkModeProvider } from '../../../contexts/DarkModeContext';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { user, LogOut } = useContext(AuthProvider);
+    const { theme, toggleTheme } = useContext(DarkModeProvider);
 
     const handleSignOut = () => {
         LogOut()
@@ -29,7 +31,7 @@ const Navbar = () => {
         <li>
             <NavLink
                 to="/"
-                className={`font-bold text-violet-500 flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
+                className={`font-bold flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
             >
                 <MdAddTask size={20}></MdAddTask>
                 <span>Add Task</span>
@@ -38,7 +40,7 @@ const Navbar = () => {
         <li>
             <NavLink
                 to="/MyTask"
-                className={`font-bold text-violet-500 flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
+                className={`font-bold flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
             >
                 <BsListTask size={20}></BsListTask>
                 <span>My Task</span>
@@ -47,7 +49,7 @@ const Navbar = () => {
         <li>
             <NavLink
                 to="/CompletedTask"
-                className={`font-bold text-violet-500 flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
+                className={`font-bold flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
             >
                 <MdOutlineTask size={20}></MdOutlineTask>
                 <span>Completed Task</span>
@@ -55,7 +57,7 @@ const Navbar = () => {
         </li>
         {
             user?.uid ?
-                <div className='flex items-center gap-4 sm:px-2'>
+                <div className='flex justify-center items-center gap-4 sm:px-2'>
                     <Link>
                         <Tooltip className='text-blue-500 font-bold ' content={user?.displayName ? user?.displayName : "Anonymous"} placement="bottom">
                             <img className='rounded-full border' style={{ height: '45px', width: '45px' }} src={user?.photoURL ? user.photoURL : userImg} referrerPolicy='no-referrer' alt="" />
@@ -67,29 +69,37 @@ const Navbar = () => {
                 :
                 <NavLink
                     to="/Login"
-                    className={`font-bold text-violet-500 flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
+                    className={`font-bold flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
                 >
                     <FaUserCircle size={20}></FaUserCircle>
                     <span>Login</span>
                 </NavLink>
         }
+        <li>
+            {
+                theme === 'light' ?
+                    <button className='' onClick={toggleTheme}><MdOutlineLightMode size={25}></MdOutlineLightMode></button>
+                    :
+                    <button className='' onClick={toggleTheme}><MdDarkMode size={25}></MdDarkMode></button>
+            }
+        </li>
 
     </React.Fragment>
 
     return (
-        <div className="px-4 py-3 mx-auto sm:max-w-xl md:max-w-full lg:mx-14 md:px-10 mt-4 rounded-lg navbar">
+        <div className={`px-4 py-3 mx-auto sm:max-w-xl md:max-w-full lg:mx-14 md:px-10 mt-4 rounded-lg ${theme === 'light' ? 'navbar' : 'shadow-2xl'}`}>
             <div className="relative flex items-center justify-between">
                 <Link
                     to="/"
                     className="inline-flex items-center"
                 >
                     <img src={logo} width={50} height={20} alt="logo" />
-                    <span className="ml-2 text-xl sm:text-2xl font-bold text-black">
-                        Task <span className='text-blue-600'>Tracker</span>
+                    <span className={`ml-2 text-xl ${theme === 'light' ? 'text-black' : 'text-white'} sm:text-2xl font-bold`}>
+                        Task <span className={`${theme === 'light' ? 'text-blue-600' : 'text-blue-500'}`}>Tracker</span>
                     </span>
                 </Link>
 
-                <ul className="flex items-center hidden space-x-6 lg:flex py-3">
+                <ul className={`flex items-center ${theme === 'light' ? 'text-violet-500' : 'text-white'} hidden space-x-6 lg:flex py-3`}>
                     {navMenu}
                 </ul>
 

@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiFillFileAdd } from 'react-icons/ai';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import { DarkModeProvider } from '../../contexts/DarkModeContext';
 
 const EditTask = () => {
+    const { theme } = useContext(DarkModeProvider);
     const navigate = useNavigate();
     const editTask = useLoaderData();
     const [storedTask, setStoredTask] = useState(editTask.data);
@@ -43,7 +45,7 @@ const EditTask = () => {
     return (
         <div className='w-full max-w-md mx-auto p-8 space-y-3 rounded-xl'>
             <div className='mt-10 mb-5'>
-                <h2 className='text-2xl sm:text-3xl text-violet-500 font-bold text-center'>Update Your Task</h2>
+                <h2 className={`text-2xl sm:text-3xl ${theme === 'light' ? 'text-violet-500' : 'text-white'} font-bold text-center`}>Update Your Task</h2>
             </div>
             <div className='flex flex-col max-w-md p-6 rounded-md sm:py-7 sm:px-7 bg-gray-50 text-gray-900'>
                 <form onSubmit={handleEdit} className='space-y-6'>

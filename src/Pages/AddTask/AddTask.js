@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { AiFillFileAdd } from 'react-icons/ai';
+import { DarkModeProvider } from '../../contexts/DarkModeContext';
 
 const AddTask = () => {
     const imageKey = process.env.REACT_APP_SECRET_KEY;
-    
+    const { theme } = useContext(DarkModeProvider);
+
     const handleTaskSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -50,7 +52,7 @@ const AddTask = () => {
     return (
         <div className='w-full max-w-md mx-auto p-8 space-y-3 rounded-xl'>
             <div className='mt-10 mb-5'>
-                <h2 className='text-2xl sm:text-3xl text-violet-500 font-bold text-center'>Add Your Daily Task</h2>
+                <h2 className={`text-2xl sm:text-3xl ${theme === 'light' ? 'text-violet-500' : 'text-white'} font-bold text-center`}>Add Your Daily Task</h2>
             </div>
             <div className='flex flex-col max-w-md p-6 rounded-md sm:py-7 sm:px-7 bg-gray-50 text-gray-900'>
                 <form onSubmit={handleTaskSubmit} className='space-y-6'>

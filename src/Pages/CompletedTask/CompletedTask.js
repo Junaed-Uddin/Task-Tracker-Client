@@ -1,12 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
 import { toast } from 'react-hot-toast';
 import { GiProgression } from 'react-icons/gi';
 import { MdDelete } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import Loader from '../../Components/Loader/Loader';
+import { DarkModeProvider } from '../../contexts/DarkModeContext';
 
 const CompletedTask = () => {
+    const { theme } = useContext(DarkModeProvider);
     const { data: completedTasks, refetch, isLoading } = useQuery({
         queryKey: ['completedTask'],
         queryFn: async () => {
@@ -76,7 +78,7 @@ const CompletedTask = () => {
             {
                 completedTasks.length ?
                     <section>
-                        <h2 className='text-3xl text-violet-500 font-bold mt-8 ml-14'>My Tasks</h2>
+                        <h2 className={`text-3xl ${theme === 'light' ? 'text-violet-500' : 'text-white'} font-bold mt-8 ml-14`}>My Tasks</h2>
                         <div className="p-2 mx-auto dark:text-gray-100 sm:max-w-xl md:max-w-full lg:mx-5 rounded mt-4 md:px-10">
                             <div className="overflow-x-auto">
                                 <table className="w-full p-6 whitespace-nowrap text-center">
@@ -89,11 +91,11 @@ const CompletedTask = () => {
                                             <th className="p-3">Actions</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="border text-black text-center">
+                                    <tbody className={`border ${theme === 'light' ? 'text-black' : 'text-white'}`}>
                                         {
                                             completedTasks.map((task, i) => <tr className='border' key={task?._id}>
                                                 <td>{i + 1}</td>
-                                                <td className="text-black">
+                                                <td>
                                                     <p>{task?.taskName}</p>
                                                 </td>
                                                 <td className="px-3 py-2">
