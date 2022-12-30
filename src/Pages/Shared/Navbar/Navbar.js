@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import './Navbar.css';
-import logo from '../../../assets/logo.jpg';
+import logo from '../../../assets/logo.png';
 import { MdAddTask, MdDarkMode, MdOutlineLightMode, MdOutlineTask } from 'react-icons/md';
 import { BsListTask } from 'react-icons/bs';
 import { FaUserCircle } from 'react-icons/fa';

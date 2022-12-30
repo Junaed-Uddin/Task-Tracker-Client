@@ -54,14 +54,14 @@ const AddTask = () => {
             <div className='mt-10 mb-5'>
                 <h2 className={`text-2xl sm:text-3xl ${theme === 'light' ? 'text-violet-500' : 'text-white'} font-bold text-center`}>Add Your Daily Task</h2>
             </div>
-            <div className='flex flex-col max-w-md p-6 rounded-md sm:py-7 sm:px-7 bg-gray-50 text-gray-900'>
+            <div className={`flex flex-col max-w-md p-6 rounded-md sm:py-7 sm:px-7  text-gray-900 ${theme === 'light' ? 'bg-gray-50' : 'bg-darkBlack'}`}>
                 <form onSubmit={handleTaskSubmit} className='space-y-6'>
                     <div className='space-y-4'>
                         <div>
                             <input
                                 type='text'
                                 name="addTask" placeholder="Add Task Name"
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:border-gray-900 text-gray-900' required
+                                className={`w-full ${theme === 'light' ? '' : 'bg-lightDark text-white border-none'} px-3 py-2 border rounded-md border-gray-300`} required
                             />
                         </div>
 
@@ -69,14 +69,14 @@ const AddTask = () => {
                             <input
                                 type='text'
                                 name="taskDesc" placeholder="Add Task Description"
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 focus:border-gray-900 className= text-gray-900' required
+                                className={`w-full ${theme === 'light' ? '' : 'bg-lightDark text-white border-none'} px-3 py-2 border rounded-md border-gray-300`} required
                             />
                         </div>
 
                         <div>
                             <input
                                 type="file" name='image' id='image' accept='image/*'
-                                className='w-full px-3 py-2 border rounded-md border-gray-300 bg-white className= focus:border-gray-900 text-gray-900' required
+                                className={`w-full ${theme === 'light' ? '' : 'bg-lightDark text-white border-none'} px-3 py-2 border rounded-md border-gray-300`} required
                             />
                         </div>
                     </div>
