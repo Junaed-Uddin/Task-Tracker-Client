@@ -7,7 +7,6 @@ import { BsListTask } from 'react-icons/bs';
 import { FaUserCircle } from 'react-icons/fa';
 import { AuthProvider } from '../../../contexts/AuthContext';
 import { toast } from 'react-hot-toast';
-import { Tooltip } from '@material-tailwind/react';
 import userImg from '../../../assets/userImg.jpg';
 import { DarkModeProvider } from '../../../contexts/DarkModeContext';
 
@@ -34,37 +33,69 @@ const Navbar = () => {
                 className={`font-bold flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
             >
                 <MdAddTask size={20}></MdAddTask>
-                <span>Add Task</span>
+                <span className='text-sm'>Add Task</span>
             </NavLink>
         </li>
+
         <li>
             <NavLink
                 to="/MyTask"
                 className={`font-bold flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
             >
                 <BsListTask size={20}></BsListTask>
-                <span>My Task</span>
+                <span className='text-sm'>My Task</span>
             </NavLink>
         </li>
+
         <li>
             <NavLink
                 to="/CompletedTask"
                 className={`font-bold flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
             >
                 <MdOutlineTask size={20}></MdOutlineTask>
-                <span>Completed Task</span>
+                <span className='text-sm'>Completed Task</span>
             </NavLink>
         </li>
+
         {
             user?.uid ?
-                <div className='flex justify-center items-center gap-4 sm:px-2'>
-                    <Link>
-                        <Tooltip className='text-blue-500 font-bold ' content={user?.displayName ? user?.displayName : "Anonymous"} placement="bottom">
-                            <img className='rounded-full border' style={{ height: '45px', width: '45px' }} src={user?.photoURL ? user.photoURL : userImg} referrerPolicy='no-referrer' alt="" />
-                        </Tooltip>
+                <div className="dropdown relative">
+                    <Link
+                        className="flex justify-center items-center dropdown-toggle px-3 py-2 bg-blue-600 text-white font-medium text-xs rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg active:text-white transition duration-150 ease-in-out whitespace-nowrap"
+                        type="button"
+                        id="dropdownMenuButton2"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        <span className='text-sm'>{user?.displayName ? user?.displayName : "Anonymous"}</span>
+                        <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            data-prefix="fas"
+                            data-icon="caret-down"
+                            className="w-2 ml-2"
+                            role="img"
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 320 512"
+                        >
+                            <path
+                                fill="currentColor"
+                                d="M31.3 192h257.3c17.8 0 26.7 21.5 14.1 34.1L174.1 354.8c-7.8 7.8-20.5 7.8-28.3 0L17.2 226.1C4.6 213.5 13.5 192 31.3 192z"
+                            ></path>
+                        </svg>
                     </Link>
-
-                    <Link className={`font-semibold text-gray-800 hover:text-amber-500 ${({ isActive }) => isActive ? 'active' : undefined}`}><button onClick={handleSignOut} className='px-3 py-2 bg-violet-500 text-white rounded'>Logout</button></Link>
+                    <ul className="dropdown-menu min-w-max absolute hidden bg-white text-base z-50 float-right py-2 list-none text-right rounded-lg shadow-lg border-none px-1">
+                        <li className='flex justify-center items-center'>
+                            <img className='rounded-full border' style={{ height: '40px', width: '40px' }} src={user?.photoURL ? user.photoURL : userImg} referrerPolicy='no-referrer' alt="userImage" />
+                            <span className='text-black text-sm px-2'>{user?.displayName ? user?.displayName : "Anonymous"}</span>
+                        </li>
+                        <hr className='border-gray-400 mt-2' />
+                        <li>
+                            <button onClick={handleSignOut}
+                                className="dropdown-item text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-gray-700 hover:bg-gray-100">Logout
+                            </button>
+                        </li>
+                    </ul>
                 </div>
                 :
                 <NavLink
@@ -72,15 +103,16 @@ const Navbar = () => {
                     className={`font-bold flex justify-center items-center gap-1 ${({ isActive }) => isActive ? 'active' : undefined}`}
                 >
                     <FaUserCircle size={20}></FaUserCircle>
-                    <span>Login</span>
+                    <span className='text-sm'>Login</span>
                 </NavLink>
         }
-        <li>
+
+        <li className='flex justify-center items-center'>
             {
                 theme === 'light' ?
-                    <button className='' onClick={toggleTheme}><MdOutlineLightMode size={25}></MdOutlineLightMode></button>
+                    <button onClick={toggleTheme}><MdOutlineLightMode size={25}></MdOutlineLightMode></button>
                     :
-                    <button className='' onClick={toggleTheme}><MdDarkMode size={25}></MdDarkMode></button>
+                    <button onClick={toggleTheme}><MdDarkMode size={25}></MdDarkMode></button>
             }
         </li>
 
@@ -128,14 +160,14 @@ const Navbar = () => {
 
                     {isMenuOpen && (
                         <div className="absolute top-0 left-0 w-full shadow-2xl">
-                            <div className="p-5 bg-white border rounded shadow-sm">
+                            <div className={`p-5 ${theme === 'light' ? 'bg-gray-50' : 'bg-darkBlack'} border rounded shadow-sm`}>
                                 <div className="flex items-center justify-center mb-4">
                                     <div>
                                         <Link
                                             to="/"
                                             className="inline-flex items-center"
                                         >
-                                            <span className="ml-2 text-xl font-bold text-black">
+                                            <span className={`ml-2 text-xl font-bold ${theme === 'light' ? 'text-black' : ''}`}>
                                                 Task <span className='text-blue-600'>Tracker</span>
                                             </span>
                                         </Link>
@@ -159,7 +191,7 @@ const Navbar = () => {
                                 </div>
 
                                 <nav className='text-center'>
-                                    <ul className="space-y-4">
+                                    <ul className={`${theme === 'light' ? 'text-violet-500' : 'text-white'} space-y-4`}>
                                         {navMenu}
                                     </ul>
                                 </nav>

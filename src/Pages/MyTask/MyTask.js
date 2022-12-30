@@ -86,7 +86,7 @@ const MyTask = () => {
                 <div className="overflow-x-auto">
                     <table className="w-full p-6 whitespace-nowrap text-center">
                         <thead>
-                            <tr className="bg-white text-black border text-center">
+                            <tr className={`${theme === 'light' ? 'bg-white text-black' : 'bg-gray-700'} border text-center`}>
                                 <th className="p-3">#</th>
                                 <th className="p-3">Task Name</th>
                                 <th className="p-3">Task Description</th>
@@ -113,6 +113,13 @@ const MyTask = () => {
                                         }
                                     </td>
                                     <td className="px-2 py-2 flex justify-center items-center">
+                                        <Link to={`/viewMedia/${task._id}`}>
+                                            <button className='text-violet-500 flex justify-center items-center border gap-1 shadow-lg mx-2 py-1.5 px-3 rounded outline-none transform active:scale-75 transition-transform' type='button'>
+                                                <AiFillEye size={20}></AiFillEye>
+                                                <span className='text-sm'>View</span>
+                                            </button>
+                                        </Link>
+
                                         <button onClick={() => handleCompleteTask(task)} className='text-green-500 flex justify-center items-center border gap-1 shadow-lg py-1.5 px-3 rounded outline-none transform active:scale-75 transition-transform' type='button'>
                                             <AiOutlineFileDone size={20}></AiOutlineFileDone>
                                             <span className='text-sm'>Complete</span>
@@ -125,17 +132,10 @@ const MyTask = () => {
                                             </button>
                                         </Link>
 
-                                        <button onClick={() => handleDelete(task)} className='text-red-500 flex justify-center items-center border gap-1 shadow-lg py-1.5 px-3 rounded mx-2 outline-none transform active:scale-75 transition-transform' type='button'>
+                                        <button onClick={() => handleDelete(task)} className='text-red-500 flex justify-center items-center border gap-1 shadow-lg py-1.5 px-3 rounded outline-none transform active:scale-75 transition-transform' type='button'>
                                             <MdDelete size={20}></MdDelete>
                                             <span className='text-sm'>Delete</span>
                                         </button>
-
-                                        <Link to={`/viewMedia/${task._id}`}>
-                                            <button className='text-violet-500 flex justify-center items-center border gap-1 shadow-lg py-1.5 px-3 rounded outline-none transform active:scale-75 transition-transform' type='button'>
-                                                <AiFillEye size={20}></AiFillEye>
-                                                <span className='text-sm'>View</span>
-                                            </button>
-                                        </Link>
                                     </td>
                                 </tr>)
                             }

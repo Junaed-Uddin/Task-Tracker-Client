@@ -83,7 +83,7 @@ const CompletedTask = () => {
                             <div className="overflow-x-auto">
                                 <table className="w-full p-6 whitespace-nowrap text-center">
                                     <thead>
-                                        <tr className="bg-white text-black border">
+                                        <tr className={`${theme === 'light' ? 'bg-white text-black' : 'bg-gray-700'} border text-center`}>
                                             <th className="p-3">#</th>
                                             <th className="p-3">Task Name</th>
                                             <th className="p-3">Task Description</th>

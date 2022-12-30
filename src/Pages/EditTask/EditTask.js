@@ -43,7 +43,7 @@ const EditTask = () => {
     console.log(storedTask)
 
     return (
-        <div className='w-full max-w-md mx-auto p-8 space-y-3 rounded-xl'>
+        <div className='w-full max-w-md mx-auto p-3 sm:p-8 space-y-3 rounded-xl'>
             <div className='mt-10 mb-5'>
                 <h2 className={`text-2xl sm:text-3xl ${theme === 'light' ? 'text-violet-500' : 'text-white'} font-bold text-center`}>Update Your Task</h2>
             </div>
