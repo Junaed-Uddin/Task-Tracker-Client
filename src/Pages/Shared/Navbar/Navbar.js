@@ -119,7 +119,7 @@ const Navbar = () => {
     </React.Fragment>
 
     return (
-        <div className={`px-4 py-3 mx-auto sm:max-w-xl md:max-w-full lg:mx-14 md:px-10 mt-4 rounded-lg ${theme === 'light' ? 'navbar' : 'shadow-2xl'}`}>
+        <div className={`px-4 py-3 mx-auto sm:max-w-xl md:max-w-full lg:mx-14 md:px-10 mt-4 rounded-lg ${theme === 'light' ? 'navbar' : 'dark-navbar'}`}>
             <div className="relative flex items-center justify-between">
                 <Link
                     to="/"
