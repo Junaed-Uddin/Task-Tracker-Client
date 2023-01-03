@@ -110,9 +110,9 @@ const Navbar = () => {
         <li className='flex justify-center items-center'>
             {
                 theme === 'light' ?
-                    <button onClick={toggleTheme}><MdOutlineLightMode size={25}></MdOutlineLightMode></button>
-                    :
                     <button onClick={toggleTheme}><MdDarkMode size={25}></MdDarkMode></button>
+                    :
+                    <button onClick={toggleTheme}><MdOutlineLightMode size={25}></MdOutlineLightMode></button>
             }
         </li>
 
